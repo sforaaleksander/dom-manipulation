@@ -1,7 +1,5 @@
 function createRow(){
-    console.log("create row replay!");
     let rowNumber = findRowNumber() + 1;
-    console.log("creating row");
     const label = document.createElement("label");
     label.setAttribute("for", `item_${rowNumber}`);
     label.innerHTML = `Item ${rowNumber}:`;
@@ -15,8 +13,29 @@ function createRow(){
     form.setAttribute("method", "GET");
     form.appendChild(label);
     form.appendChild(input);
+    const removeButton = createRemoveButton(rowNumber);
+    form.appendChild(removeButton)
 
     document.querySelector(".container").appendChild(form);
+}
+
+function createRemoveButton(index){
+    console.log("Adding remove button");
+    const button = document.createElement("button");
+    button.innerHTML = "Remove item";
+    button.setAttribute("for", `item ${index}`);
+    button.setAttribute("id", index);
+    button.addEventListener('click', removeRow);
+    return button;
+}
+
+function removeRow(){
+    const element = event.target;
+    const previous1 = element.previousSibling;
+    const previous2 = previous1.previousSibling;
+    element.remove();
+    previous1.remove();
+    previous2.remove();
 }
 
 function findRowNumber(){
@@ -31,8 +50,8 @@ function findRowNumber(){
 
 function main() {
     console.log("clicked!");
-    let button = document.getElementById("add_row");
-    button.addEventListener('click', createRow);
+    let addButton = document.getElementById("add_row");
+    addButton.addEventListener('click', createRow);
 }
 
 main();
