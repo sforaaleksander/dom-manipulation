@@ -1,6 +1,10 @@
 function main() {
     hundredCells();
-    setTimeout(randomCellColorChange, 1000);
+    // setTimeout(function run(){
+    //     randomCellColorChange();
+    //     setTimeout(run, 1000);
+    // }, 1000);
+    setInterval(randomCellColorChange, 1000);
     console.log("loop");
 }
 
@@ -12,7 +16,7 @@ function randomCellColorChange() {
     let randomNumber = Math.floor(Math.random() * 100);
     const randomCell = document.getElementById(randomNumber);
     randomCell.style.backgroundColor = "#e67e22";
-}
+} 
 
 
 function hundredCells() {
