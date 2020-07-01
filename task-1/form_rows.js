@@ -31,22 +31,18 @@ function createRemoveButton(index){
 
 function removeRow(){
     const element = event.target;
-    const input = element.previousSibling;
-    const label = input.previousSibling;
-    element.remove();
-    input.remove();
-    label.remove();
+    element.parentNode.remove();
 }
 
 
 function findRowNumber(){
-    // let innerHtml = document.querySelector('label:last-of-type').innerHTML;
-    // console.log(innerHtml);
-    // let rowNum = innerHtml.replace("Item ", "");
-    // rowNum = rowNum.replace(":","");
-    let elements = document.querySelectorAll('label');
+    let lastForm = document.querySelector('form:last-of-type');
+    let lastLabel = lastForm.firstElementChild.innerHTML;
 
-    return elements.length;
+    let rowNum = lastLabel.replace("Item ", "");
+    rowNum = parseInt(rowNum.replace(":",""));
+
+    return rowNum;
 }
 
 function main() {
