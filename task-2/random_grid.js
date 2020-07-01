@@ -7,16 +7,6 @@ function main() {
     }
 }
 
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
-
-
-main();
 
 function hundredCells(){
     for (let i=0;i<100;i++){
@@ -30,9 +20,10 @@ function createCell() {
     div.setAttribute("class", "cell");
     div.setAttribute("style", "height: 3vh; width: 3vw; border: solid black 0.1em; background-color: blue;");
     div.innerHTML = "&nbsp;";
-
+    
     const container = document.querySelector(".container");
     container.setAttribute("style", "display:flex; flex-wrap:wrap; align-items:");
     container.appendChild(div);
 }
 
+main();
