@@ -31,12 +31,13 @@ function createRemoveButton(index){
 
 function removeRow(){
     const element = event.target;
-    const previous1 = element.previousSibling;
-    const previous2 = previous1.previousSibling;
+    const input = element.previousSibling;
+    const label = input.previousSibling;
     element.remove();
-    previous1.remove();
-    previous2.remove();
+    input.remove();
+    label.remove();
 }
+
 
 function findRowNumber(){
     // let innerHtml = document.querySelector('label:last-of-type').innerHTML;
