@@ -9,6 +9,9 @@
 //     '100': moveRight
 // };
 
+let cell;
+
+
 function createCell(index) {
     const div = document.createElement("div");
     div.setAttribute("class", "cell");
@@ -27,9 +30,16 @@ function hundredCells() {
     }
 }
 
+function initCell(){
+    cell = this;
+    cell.classList.add('active');
+}
+
 function main() {
     hundredCells()
-    // placeColor();
+    placeColor();
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => cell.addEventListener('click', initCell));
 
 }
 
@@ -40,4 +50,4 @@ function placeColor(){
 }
 
 main();
- 
+  
