@@ -2,14 +2,22 @@
 // write your moveX functions and after that
 // you can call these like moves[keycode]();
 
-// const moves = {
-//     '97': moveLeft,
-//     '115': moveDown,
-//     '119': moveUp,
-//     '100': moveRight
-// };
+const moves = {
+    '97': moveLeft,
+    '115': moveDown,
+    '119': moveUp,
+    '100': moveRight
+};
+
+const values = {
+    "right": 1,
+    "left": -1,
+    "up": -10,
+    "down": 10
+}
 
 let cell;
+let cells;
 
 
 function createCell(index) {
@@ -30,23 +38,61 @@ function hundredCells() {
     }
 }
 
+function deactivateCell(){
+    this.classList.toggle("active");
+    cells.forEach(cell => cell.addEventListener('click', initCell));
+    document.removeEventListener("keypress", keyPressed);
+}
+
 function initCell(){
+    cells.forEach(cell => cell.removeEventListener('click', initCell));
     cell = this;
     cell.classList.add('active');
+    cell.addEventListener('click', deactivateCell);
+    document.addEventListener("keypress", keyPressed);
+}
+
+function initGrid() {
+    hundredCells()
+    cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => cell.addEventListener('click', initCell));
 }
 
 function main() {
-    hundredCells()
-    placeColor();
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach(cell => cell.addEventListener('click', initCell));
-
+    initGrid();
 }
 
-function placeColor(){
-    let randomNumber = Math.floor(Math.random() * 100);
-    const randomCell = document.getElementById(randomNumber);
-    randomCell.focus();
+function moveRight(){
+    move(values.right);
+}
+
+function moveLeft(){
+    move(values.left);
+}
+
+function moveUp(){
+    move(values.up);
+}
+
+function moveDown(){
+    move(values.down);
+}
+
+function move(where) {
+    let currentId = parseInt(cell.id);
+    let nextId = currentId + where;
+    if ( nextId > 99 || nextId < 0){
+        return;
+    }
+    cell.removeEventListener('click', deactivateCell);
+    cell.classList.toggle("active");
+    cell = document.getElementById(nextId);
+    cell.addEventListener('click', deactivateCell);
+    cell.classList.toggle("active");
+}
+
+function keyPressed(){
+    moves[event.keyCode]();
 }
 
 main();
